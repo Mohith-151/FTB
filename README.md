@@ -1,4 +1,4 @@
-# Minimal Roots: Family Tree Builder 🌳
+# FTB: Family Tree Builder 🌳
 
 A minimalist, high-resolution family tree builder optimized for perfect A3 and A4 physical printing.
 
