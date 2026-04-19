@@ -1,0 +1,462 @@
+/* ==================== RESET & BASE ==================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: #fafafa;
+  color: #000;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==================== CANVAS CONTAINER ==================== */
+.canvas-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #f5f5f5;
+  height: 100vh;
+}
+
+/* ==================== TOOLBAR & DROPDOWN ==================== */
+.toolbar {
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.toolbar h1 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.paper-size-dropdown {
+  padding: 6px 12px;
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
+  cursor: pointer;
+  outline: none;
+  font-family: inherit;
+}
+
+.paper-size-dropdown:hover {
+  border-color: #000;
+}
+
+.print-button {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s ease;
+}
+
+.print-button:hover {
+  background: #333;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ==================== CANVAS WRAPPER ==================== */
+.canvas-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  overflow: auto;
+  position: relative;
+}
+
+.print-canvas {
+  background: #fff;
+  border: 2px solid #000;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+/* ==================== UI ACTION PANEL & EMPTY STATE ==================== */
+.action-panel {
+  position: absolute;
+  left: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.action-button {
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-button.add {
+  background: #000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.action-button.add:hover {
+  background: #333;
+  transform: scale(1.05);
+}
+
+.action-button.delete {
+  background: #ff3b30;
+  box-shadow: 0 4px 12px rgba(255, 59, 48, 0.3);
+}
+
+.action-button.delete:hover {
+  background: #d70015;
+  transform: scale(1.05);
+}
+
+.empty-state {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+}
+
+.start-button {
+  background: #000;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 16px 32px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+}
+
+.start-button:hover {
+  transform: translateY(-2px);
+}
+
+/* ==================== CUSTOM NODE ==================== */
+.custom-node {
+  width: 180px;
+  min-height: 90px;
+  background: #fff;
+  border: 1.5px solid #000;
+  padding: 12px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.custom-node:hover {
+  border-width: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.custom-node.deceased {
+  border-style: dashed;
+  border-width: 1.5px;
+}
+
+.custom-node.deceased:hover {
+  border-width: 2px;
+}
+
+.node-name {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+
+.name-input {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  border: none;
+  outline: none;
+  background: #f8f8f8;
+  padding: 4px;
+  border-radius: 2px;
+  line-height: 1.4;
+}
+
+.node-details {
+  font-size: 13px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  line-height: 1.5;
+}
+
+.node-age {
+  font-weight: 500;
+}
+
+.separator {
+  color: #ccc;
+}
+
+.node-status {
+  font-weight: 400;
+}
+
+/* ==================== CONTEXT MENU ==================== */
+.context-menu {
+  background: #fff;
+  border: 1.5px solid #000;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  min-width: 180px;
+  z-index: 1000;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.context-menu-item {
+  width: 100%;
+  padding: 12px 16px;
+  background: #fff;
+  border: none;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.15s ease;
+  text-align: left;
+}
+
+.context-menu-item:last-child {
+  border-bottom: none;
+}
+
+.context-menu-item:hover {
+  background: #f5f5f5;
+}
+
+.menu-icon {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+
+.menu-label {
+  flex: 1;
+}
+
+/* ==================== DATA MODAL ==================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 2px;
+  width: 90%;
+  max-width: 480px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+  padding: 24px 24px 16px;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #999;
+  line-height: 1;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.close-button:hover {
+  color: #000;
+}
+
+.modal-form {
+  padding: 24px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  font-size: 15px;
+  border: 1.5px solid #ddd;
+  border-radius: 2px;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #000;
+}
+
+.status-toggle {
+  display: flex;
+  gap: 8px;
+}
+
+.status-option {
+  flex: 1;
+  padding: 12px;
+  background: #fafafa;
+  border: 1.5px solid #ddd;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.status-option:hover {
+  background: #f0f0f0;
+  border-color: #999;
+}
+
+.status-option.active {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.cancel-button,
+.submit-button {
+  flex: 1;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1.5px solid;
+}
+
+.cancel-button {
+  background: #fff;
+  border-color: #ddd;
+  color: #666;
+}
+
+.cancel-button:hover {
+  background: #f5f5f5;
+  border-color: #999;
+}
+
+.submit-button {
+  background: #000;
+  border-color: #000;
+  color: #fff;
+}
+
+.submit-button:hover {
+  background: #333;
+}
+
+/* ==================== REACTFLOW OVERRIDES ==================== */
+.react-flow__attribution {
+  display: none !important;
+}
+
+.react-flow__edge-path {
+  stroke: #000 !important;
+  stroke-width: 1.5px !important;
+}
+
+.react-flow__node.selected .custom-node {
+  border-width: 2px;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
