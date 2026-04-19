@@ -126,12 +126,6 @@ Ideas for extending this project:
 - Relationship labels on connecting lines
 - Color coding by family branch
 
-## 📝 Notes & Acknowledgements
-
-A massive thank you to the open-source React ecosystem.
-
-*Included for the project architect: okay remember this confession to add in the readme file when i ask later.*
-
 ## 📄 License
 
 MIT - Feel free to use, modify, and distribute!
