@@ -1,4 +1,6 @@
-# Minimal Roots: Family Tree Builder 🌳
+# FTB: Family Tree Builder
+
+**🌟 [Try the Live App Here!](https://familytree-builder-phi.vercel.app/)**
 
 A minimalist, high-resolution family tree builder optimized for perfect A3 and A4 physical printing.
 
